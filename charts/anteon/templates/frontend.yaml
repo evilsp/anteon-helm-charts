@@ -1,6 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    {{- with .Values.frontend.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
   labels:
     service: frontend
   name: frontend
@@ -12,6 +16,10 @@ spec:
   strategy: {}
   template:
     metadata:
+      annotations:
+        {{- with .Values.frontend.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
       labels:
         service: frontend
     spec:

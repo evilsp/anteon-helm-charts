@@ -12,6 +12,10 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    {{- with .Values.postgres.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
   labels:
     service: postgres
   name: postgres
@@ -24,6 +28,10 @@ spec:
     type: Recreate
   template:
     metadata:
+      annotations:
+        {{- with .Values.postgres.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
       labels:
         service: postgres
     spec:

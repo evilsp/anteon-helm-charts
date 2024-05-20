@@ -15,6 +15,8 @@ ingress:
   #      - chart-example.local
 
 service:
+  annotations: {}
+  podAnnotations: {}
   name: nginx-service
   port: 80
   nodePort: 30000
@@ -29,6 +31,8 @@ influxDB:
   #   - hammerBucketDetailed
   #   - hammerBucketIteration
   # username and password are only used if external is false
+  annotations: {}
+  podAnnotations: {}
   external: false
   url: "http://influxdb:8086"
   apiToken: "5yR2qD5zCqqvjwCKKXojnPviQaB87w9JcGweVChXkhWRL"
@@ -46,6 +50,8 @@ postgres:
   # and you must create the databases manually
   #   - backend
   #   - hammermanager
+  annotations: {}
+  podAnnotations: {}
   external: false
   host: "postgres"
   port: 5432
@@ -65,14 +71,24 @@ pvc:
     size: 30Gi
 
 alazBackend:
+  annotations: {}
+  podAnnotations: {}
   replicas: 3
+
+alazBackendCeleryBeat:
+  annotations: {}
+  podAnnotations: {}
   celeryBeatReplicas: 1
+
+alazBackendCeleryWorker:
+  annotations: {}
+  podAnnotations: {}
   celeryWorkerReplicas: 2
 
 backend:
+  annotations: {}
+  podAnnotations: {}
   replicas: 3
-  celeryBeatReplicas: 1
-  celeryWorkerReplicas: 1
   # The defaultMonitoringID is used to create a default cluster with defaultClusterName with the specified monitoring ID.
   # If the defaultMonitoringID is not provided, no default cluster will be created.
   # defaultMonitoringID format is uuid
@@ -82,33 +98,69 @@ backend:
   # If the defaultMonitoringID is not provided, no default cluster will be created.
   defaultClusterName: "default-cluster"
 
+backendCeleryBeat:
+  annotations: {}
+  podAnnotations: {}
+  celeryBeatReplicas: 1
+
+backendCeleryWorker:
+  annotations: {}
+  podAnnotations: {}
+  celeryWorkerReplicas: 1
+
 frontend:
+  annotations: {}
+  podAnnotations: {}
   replicas: 1
 
 hammer:
+  annotations: {}
+  podAnnotations: {}
   replicas: 1
 
 hammerdebug:
+  annotations: {}
+  podAnnotations: {}
   replicas: 1
 
 hammermanager:
+  annotations: {}
+  podAnnotations: {}
   replicas: 1
+
+hammermanagerCeleryBeat:
+  annotations: {}
+  podAnnotations: {}
   celeryBeatReplicas: 1
+
+hammermanagerCeleryWorker:
+  annotations: {}
+  podAnnotations: {}
   celeryWorkerReplicas: 1
 
 prometheus:
+  annotations: {}
+  podAnnotations: {}
   replicas: 1
 
 rabbitmq:
+  annotations: {}
+  podAnnotations: {}
   replicas: 1
 
 redisBackend:
+  annotations: {}
+  podAnnotations: {}
   replicas: 1
 
 redisAlazBackend:
+  annotations: {}
+  podAnnotations: {}
   replicas: 1
 
 seaweedfs:
+  annotations: {}
+  podAnnotations: {}
   replicas: 1
 
 images:

@@ -1,6 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    {{- with .Values.hammer.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
   labels:
     service: hammer
   name: hammer
@@ -13,6 +17,10 @@ spec:
     type: Recreate
   template:
     metadata:
+      annotations:
+        {{- with .Values.hammer.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
       labels:
         service: hammer
     spec:

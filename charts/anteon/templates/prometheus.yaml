@@ -23,6 +23,10 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    {{- with .Values.prometheus.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
   name: prometheus
   labels:
     app: prometheus
@@ -33,6 +37,10 @@ spec:
       app: prometheus
   template:
     metadata:
+      annotations:
+        {{- with .Values.prometheus.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
       labels:
         app: prometheus
     spec:

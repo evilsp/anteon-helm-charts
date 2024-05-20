@@ -14,6 +14,10 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    {{- with .Values.service.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
   name: nginx-deployment
 spec:
   replicas: {{ .Values.service.replicas }}
@@ -22,6 +26,10 @@ spec:
       app: nginx
   template:
     metadata:
+      annotations:
+        {{- with .Values.service.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
       labels:
         app: nginx
     spec:

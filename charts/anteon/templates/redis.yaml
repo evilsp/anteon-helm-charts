@@ -1,6 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    {{- with .Values.redisBackend.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
   labels:
     service: redis-backend
   name: redis-backend
@@ -13,6 +17,10 @@ spec:
     type: Recreate
   template:
     metadata:
+      annotations:
+        {{- with .Values.redisBackend.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
       labels:
         service: redis-backend
     spec:
